@@ -1,3 +1,4 @@
+import { Button } from 'antd'
 import { FormEvent } from 'react'
 
 // interface Base {
@@ -17,7 +18,7 @@ import { FormEvent } from 'react'
 
 export const Login = () => {
   const login = (param: { username: string; password: string }) => {
-    fetch('api/login', {
+    fetch('/api/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -39,16 +40,19 @@ export const Login = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="username">用户名</label>
-        <input type="text" id={'username'} autoFocus />
-      </div>
-      <div>
-        <label htmlFor="password">密码</label>
-        <input type="password" id={'password'} />
-      </div>
-      <button type={'submit'}>登录</button>
-    </form>
+    <div style={{ textAlign: 'center' }}>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="username">用户名</label>
+          <input type="text" id={'username'} autoFocus />
+        </div>
+        <div>
+          <label htmlFor="password">密码</label>
+          <input type="password" id={'password'} />
+        </div>
+        <button type={'submit'}>登录</button>
+      </form>
+      <Button type="primary">123</Button>
+    </div>
   )
 }
