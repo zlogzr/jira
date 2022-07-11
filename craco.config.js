@@ -4,6 +4,17 @@ const CracoLessPlugin = require('craco-less')
 const aliasPlugin = require('craco-alias')
 
 module.exports = () => ({
+  devServer: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8000',
+        changeOrigin: true
+        // pathRewrite: {
+        //   '^/api': ''
+        // }
+      }
+    }
+  },
   plugins: [
     {
       plugin: CracoLessPlugin,
