@@ -1,5 +1,6 @@
 import { Button } from 'antd'
 import { FormEvent } from 'react'
+import './style.less'
 
 // interface Base {
 //   id: number
@@ -40,7 +41,7 @@ export const Login = () => {
   }
 
   return (
-    <div style={{ textAlign: 'center' }}>
+    <div className="login-page-box">
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="username">用户名</label>
