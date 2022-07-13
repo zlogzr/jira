@@ -14,5 +14,6 @@
   "insertPragma": false,
   "proseWrap": "preserve",
   "htmlWhitespaceSensitivity": "ignore",
-  "endOfLine": "auto"
+  "endOfLine": "auto",
+  "importOrderSeparation": true
 }

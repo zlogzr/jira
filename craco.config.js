@@ -4,17 +4,17 @@ const CracoLessPlugin = require('craco-less')
 const aliasPlugin = require('craco-alias')
 
 module.exports = () => ({
-  devServer: {
-    proxy: {
-      '/api': {
-        target: 'http://localhost:8000',
-        changeOrigin: true
-        // pathRewrite: {
-        //   '^/api': ''
-        // }
-      }
-    }
-  },
+  // devServer: {
+  //   proxy: {
+  //     '/api': {
+  //       target: 'http://localhost:3001',
+  //       changeOrigin: true,
+  //       pathRewrite: {
+  //         '^/api': ''
+  //       }
+  //     },
+  //   }
+  // },
   plugins: [
     {
       plugin: CracoLessPlugin,
@@ -22,7 +22,6 @@ module.exports = () => ({
         lessLoaderOptions: {
           lessOptions: {
             // 修改主题色
-            modifyVars: { '@primary-color': '#4578FA' },
             javascriptEnabled: true
           }
         }

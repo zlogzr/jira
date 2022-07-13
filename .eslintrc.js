@@ -20,6 +20,8 @@ module.exports = {
   plugins: ['react', '@typescript-eslint', 'prettier'],
   rules: {
     '@typescript-eslint/no-var-requires': 0,
-    'react/react-in-jsx-scope': 0
+    'react/react-in-jsx-scope': 0,
+    'react/no-children-prop': 0,
+    '@typescript-eslint/ban-ts-comment': 0
   }
 }
