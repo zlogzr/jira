@@ -2,5 +2,5 @@
   "./src/**/*.{ts,tsx}": [
     "pretty-quick --staged"
   ],
-  "./src/**/*.less": "stylelint --cache --fix --custom-syntax postcss-less"
+  "./src/**/*.less": "stylelint --cache --fix"
 }
