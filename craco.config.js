@@ -22,6 +22,7 @@ module.exports = () => ({
         lessLoaderOptions: {
           lessOptions: {
             // 修改主题色
+            modifyVars: { '@primary-color': '#4578F8', '@font-size-base': '16px' },
             javascriptEnabled: true
           }
         }
