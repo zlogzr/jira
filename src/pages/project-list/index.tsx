@@ -1,4 +1,5 @@
 import { useProjects } from '@/hook/project'
+import { useDocumentTitle } from '@/hook/useDocumentTitle'
 import { useUsers } from '@/hook/user'
 import { useDebounce } from '@/utils'
 import styled from '@emotion/styled'
@@ -19,6 +20,8 @@ export const ProjectList = () => {
   const debouncedParam = useDebounce(param, 200)
   const { isLoading, error, data: list } = useProjects(debouncedParam)
   const { data: users } = useUsers()
+
+  useDocumentTitle('项目列表', false)
   return (
     <Container>
       <h1>项目列表</h1>

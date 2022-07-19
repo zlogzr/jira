@@ -1,6 +1,7 @@
 import left from '@/assets/left.svg'
 import logo from '@/assets/logo.svg'
 import right from '@/assets/right.svg'
+import { useDocumentTitle } from '@/hook/useDocumentTitle'
 import styled from '@emotion/styled'
 import { Button, Card, Divider, Typography } from 'antd'
 import { useState } from 'react'
@@ -11,6 +12,7 @@ import { Register } from './Register'
 export const UnauthenticatedApp = () => {
   const [isRegister, setIsRegister] = useState(false)
   const [error, setError] = useState<Error | null>(null)
+  useDocumentTitle('Jira任务管理系统')
   return (
     <Container>
       <Header />
