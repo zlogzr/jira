@@ -1,7 +1,9 @@
+import './wdyr'
+
 import { DevTools, loadServer } from 'jira-dev-tool'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-
+// 务必在jira-dev-tool后面引入
 import 'antd/dist/antd.less'
 
 import App from './App'

@@ -1,10 +1,10 @@
 import { useProjects } from '@/hook/project'
 import { useDocumentTitle } from '@/hook/useDocumentTitle'
+import { useUrlQueryParam } from '@/hook/useUrlQueryParam'
 import { useUsers } from '@/hook/user'
 import { useDebounce } from '@/utils'
 import styled from '@emotion/styled'
 import { Typography } from 'antd'
-import { useState } from 'react'
 
 import { List } from './list'
 import { SearchPanel } from './search-panel'
@@ -13,10 +13,9 @@ import { SearchPanel } from './search-panel'
 // 我们希望，在静态代码中，就能找到其中的一些错误 -> 强类型
 
 export const ProjectList = () => {
-  const [param, setParam] = useState({
-    name: '',
-    personId: ''
-  })
+  // 基本类型，可以放到依赖里；组件状态，可以放到依赖里；非组件状态的对象，绝不可以放到依赖里
+  // https://codesandbox.io/s/keen-wave-tlz9s?file=/src/App.js
+  const [param, setParam] = useUrlQueryParam(['name', 'personId'])
   const debouncedParam = useDebounce(param, 200)
   const { isLoading, error, data: list } = useProjects(debouncedParam)
   const { data: users } = useUsers()
@@ -31,6 +30,8 @@ export const ProjectList = () => {
     </Container>
   )
 }
+
+ProjectList.whyDidYouRender = false
 
 const Container = styled.div`
   padding: 3.2rem;

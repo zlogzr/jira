@@ -3,9 +3,10 @@ import { Row } from '@/components/lib'
 import { useAuth } from '@/context/auth-context'
 import { Project } from '@/pages/project'
 import { ProjectList } from '@/pages/project-list'
+import { resetRoute } from '@/utils'
 import styled from '@emotion/styled'
 import { Button, Dropdown, Menu } from 'antd'
-import { Route, Routes } from 'react-router'
+import { Navigate, Route, Routes } from 'react-router'
 import { BrowserRouter as Router } from 'react-router-dom'
 
 export const AuthenticatedApp = () => {
@@ -15,6 +16,7 @@ export const AuthenticatedApp = () => {
       <Main>
         <Router>
           <Routes>
+            <Route index element={<Navigate to={'/projects'} />} />
             <Route path={'/projects'} element={<ProjectList />} />
             <Route path={'/projects/:projectId/*'} element={<Project />} />
           </Routes>
@@ -30,7 +32,9 @@ const PageHeader = () => {
   return (
     <Header between={true}>
       <HeaderLeft gap={true}>
-        <SoftwareLogo width={'18rem'} color={'rgb(38, 132, 255)'} />
+        <Button type={'link'} onClick={resetRoute}>
+          <SoftwareLogo width={'18rem'} color={'rgb(38, 132, 255)'} />
+        </Button>
         <h2>项目</h2>
         <h2>用户</h2>
       </HeaderLeft>

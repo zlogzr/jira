@@ -57,6 +57,7 @@
     "@trivago/prettier-plugin-sort-imports": "^3.2.0",
     "@typescript-eslint/eslint-plugin": "^5.30.5",
     "@typescript-eslint/parser": "^5.30.5",
+    "@welldone-software/why-did-you-render": "^7.0.1",
     "craco-alias": "^3.0.1",
     "craco-less": "^2.0.0",
     "eslint": "^8.19.0",
