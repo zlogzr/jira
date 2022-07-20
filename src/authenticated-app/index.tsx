@@ -41,13 +41,18 @@ const PageHeader = () => {
       <HeaderRight>
         <Dropdown
           overlay={
-            <Menu>
-              <Menu.Item key={'logout'}>
-                <Button onClick={logout} type={'link'}>
-                  登出
-                </Button>
-              </Menu.Item>
-            </Menu>
+            <Menu
+              items={[
+                {
+                  key: 'logout',
+                  label: (
+                    <Button onClick={logout} type={'link'}>
+                      登出
+                    </Button>
+                  )
+                }
+              ]}
+            />
           }
         >
           <Button type={'link'} onClick={e => e.preventDefault()}>
