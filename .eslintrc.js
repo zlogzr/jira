@@ -23,6 +23,7 @@ module.exports = {
     'react/react-in-jsx-scope': 0,
     'react/no-children-prop': 0,
     '@typescript-eslint/ban-ts-comment': 0,
-    '@typescript-eslint/no-explicit-any': 0
+    '@typescript-eslint/no-explicit-any': 0,
+    '@typescript-eslint/no-empty-function': 0
   }
 }
