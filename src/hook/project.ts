@@ -2,19 +2,22 @@ import { useAsync } from '@/hook/use-async'
 import { Project } from '@/pages/project-list/list'
 import { useHttp } from '@/utils/http'
 import { cleanObject } from '@/utils/index'
-import { useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 
 export const useProjects = (param?: Partial<Project>) => {
   const client = useHttp()
   const { run, ...result } = useAsync<Project[]>()
 
-  const fetchProjects = () => client('projects', { data: cleanObject(param || {}) })
+  const fetchProjects = useCallback(
+    () => client('projects', { data: cleanObject(param || {}) }),
+    [param, client]
+  )
 
   useEffect(() => {
     run(fetchProjects(), {
       retry: fetchProjects
     })
-  }, [param])
+  }, [param, run, fetchProjects])
 
   return result
 }
