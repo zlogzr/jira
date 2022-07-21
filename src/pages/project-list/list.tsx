@@ -1,6 +1,7 @@
+import { ButtonNoPadding } from '@/components/lib'
 import { Pin } from '@/components/pin'
 import { useEditProject } from '@/hook/project'
-import { Table } from 'antd'
+import { Dropdown, Menu, Table } from 'antd'
 import { TableProps } from 'antd/es/table'
 import dayjs from 'dayjs'
 import { Link } from 'react-router-dom'
@@ -19,6 +20,7 @@ export interface Project {
 interface ListProps extends TableProps<Project> {
   users: User[]
   refresh?: () => void
+  projectButton: JSX.Element
 }
 
 export const List = ({ users, ...props }: ListProps) => {
@@ -57,6 +59,21 @@ export const List = ({ users, ...props }: ListProps) => {
           render(value, project) {
             return (
               <span>{project.created ? dayjs(project.created).format('YYYY-MM-DD') : '无'}</span>
+            )
+          }
+        },
+        {
+          render() {
+            return (
+              <Dropdown
+                overlay={
+                  <Menu>
+                    <Menu.Item key={'edit'}>{props.projectButton}</Menu.Item>
+                  </Menu>
+                }
+              >
+                <ButtonNoPadding type={'link'}>...</ButtonNoPadding>
+              </Dropdown>
             )
           }
         }
