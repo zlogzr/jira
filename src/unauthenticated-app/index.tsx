@@ -1,9 +1,10 @@
 import left from '@/assets/left.svg'
 import logo from '@/assets/logo.svg'
 import right from '@/assets/right.svg'
+import { ErrorBox } from '@/components/lib'
 import { useDocumentTitle } from '@/hook/useDocumentTitle'
 import styled from '@emotion/styled'
-import { Button, Card, Divider, Typography } from 'antd'
+import { Button, Card, Divider } from 'antd'
 import { useState } from 'react'
 
 import { Login } from './Login'
@@ -19,7 +20,7 @@ export const UnauthenticatedApp = () => {
       <Background />
       <ShadowCard>
         <Title>{isRegister ? '请注册' : '请登录'}</Title>
-        {error ? <Typography.Text type={'danger'}>{error.message}</Typography.Text> : null}
+        <ErrorBox error={error} />
         {isRegister ? <Register onError={setError} /> : <Login onError={setError} />}
         <Divider />
         <Button type="link" onClick={() => setIsRegister(!isRegister)}>
