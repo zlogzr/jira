@@ -8,58 +8,35 @@ import { ProjectModal } from '@/pages/project-list/project-modal'
 import { resetRoute } from '@/utils'
 import styled from '@emotion/styled'
 import { Button, Dropdown, Menu } from 'antd'
-import { useState } from 'react'
 import { Navigate, Route, Routes } from 'react-router'
 import { BrowserRouter as Router } from 'react-router-dom'
 
 export const AuthenticatedApp = () => {
-  const [projectModalOpen, setProjectModalOpen] = useState(false)
-
   return (
     <Container>
-      <PageHeader
-        projectButton={
-          <ButtonNoPadding onClick={() => setProjectModalOpen(true)} type={'link'}>
-            创建项目
-          </ButtonNoPadding>
-        }
-      />
+      <PageHeader />
       <Main>
         <Router>
           <Routes>
             <Route index element={<Navigate to={'/projects'} />} />
-            <Route
-              path={'/projects'}
-              element={
-                <ProjectList
-                  projectButton={
-                    <ButtonNoPadding onClick={() => setProjectModalOpen(true)} type={'link'}>
-                      创建项目
-                    </ButtonNoPadding>
-                  }
-                />
-              }
-            />
+            <Route path={'/projects'} element={<ProjectList />} />
             <Route path={'/projects/:projectId/*'} element={<Project />} />
           </Routes>
         </Router>
       </Main>
-      <ProjectModal
-        projectModalOpen={projectModalOpen}
-        onClose={() => setProjectModalOpen(false)}
-      />
+      <ProjectModal />
     </Container>
   )
 }
 
-const PageHeader = (props: { projectButton: JSX.Element }) => {
+const PageHeader = () => {
   return (
     <Header between={true}>
       <HeaderLeft gap={true}>
         <ButtonNoPadding type={'link'} onClick={resetRoute}>
           <SoftwareLogo width={'18rem'} color={'rgb(38, 132, 255)'} />
         </ButtonNoPadding>
-        <ProjectPopover {...props} />
+        <ProjectPopover />
         <h2>用户</h2>
       </HeaderLeft>
       <HeaderRight>
