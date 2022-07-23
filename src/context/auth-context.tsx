@@ -4,6 +4,7 @@ import { useAsync } from '@/hook/use-async'
 import { useMount } from '@/utils'
 import { http } from '@/utils/http'
 import React, { ReactNode } from 'react'
+import { useQueryClient } from 'react-query'
 
 interface AuthForm {
   username: string
@@ -51,10 +52,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setData: setUser
   } = useAsync<User | null>()
 
+  const queryClient = useQueryClient()
+
   // point free
   const login = (form: AuthForm) => auth.login(form).then(setUser)
   const register = (form: AuthForm) => auth.register(form).then(setUser)
-  const logout = () => auth.logout().then(() => setUser(null))
+  const logout = () =>
+    auth.logout().then(() => {
+      setUser(null)
+      queryClient.clear()
+    })
 
   useMount(() => {
     run(bootstrapUser())

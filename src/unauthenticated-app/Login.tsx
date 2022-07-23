@@ -12,7 +12,6 @@ export const Login = ({ onError }: { onError: (error: Error) => void }) => {
     try {
       await run(login(values))
     } catch (e) {
-      console.log(e, 'e-------')
       onError(e as Error)
     }
   }

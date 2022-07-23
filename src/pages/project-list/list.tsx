@@ -31,7 +31,12 @@ export const List = ({ users, ...props }: ListProps) => {
       pagination={false}
       columns={[
         {
-          title: <Pin checked={true} disabled={true} />,
+          title: (
+            <Pin
+              checked={!props.dataSource?.filter(project => !project.pin).length}
+              disabled={true}
+            />
+          ),
           render(value, project) {
             return <Pin checked={project.pin} onCheckedChange={pinProject(project.id)} />
           }
