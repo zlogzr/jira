@@ -1,7 +1,7 @@
 import { ErrorBox } from '@/components/lib'
 import { UserSelect } from '@/components/user-select'
 import { useAddProject, useEditProject } from '@/hook/project'
-import { useProjectModal } from '@/pages/project-list/util'
+import { useProjectModal, useProjectsQueryKey } from '@/pages/project-list/util'
 import styled from '@emotion/styled'
 import { Button, Drawer, Form, Input, Spin } from 'antd'
 import { useForm } from 'antd/es/form/Form'
@@ -9,18 +9,20 @@ import { useEffect } from 'react'
 
 export const ProjectModal = () => {
   const { projectModalOpen, close, editingProject, isLoading } = useProjectModal()
+
+  const title = editingProject ? '编辑项目' : '创建项目'
   const useMutateProject = editingProject ? useEditProject : useAddProject
 
-  const { mutateAsync, error, isLoading: mutateLoading } = useMutateProject()
+  const { mutateAsync, error, isLoading: mutateLoading } = useMutateProject(useProjectsQueryKey())
+
   const [form] = useForm()
+
   const onFinish = (values: any) => {
     mutateAsync({ ...editingProject, ...values }).then(() => {
       form.resetFields()
       close()
     })
   }
-
-  const title = editingProject ? '编辑项目' : '创建项目'
 
   useEffect(() => {
     form.setFieldsValue(editingProject)

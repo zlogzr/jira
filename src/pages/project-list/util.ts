@@ -1,7 +1,8 @@
 import { useProject } from '@/hook/project'
 import { useUrlQueryParam } from '@/hook/useUrlQueryParam'
+import { cleanObject } from '@/utils'
 import { useMemo } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { URLSearchParamsInit, useSearchParams } from 'react-router-dom'
 
 // 项目列表搜索的参数
 export const useProjectsSearchParams = () => {
@@ -12,18 +13,26 @@ export const useProjectsSearchParams = () => {
   ] as const
 }
 
+export const useProjectsQueryKey = () => {
+  const [params] = useProjectsSearchParams()
+  return ['projects', params]
+}
+
 export const useProjectModal = () => {
   const [{ projectCreate }, setProjectCreate] = useUrlQueryParam(['projectCreate'])
   const [{ editingProjectId }, setEditingProjectId] = useUrlQueryParam(['editingProjectId'])
-  const [, setUrlParams] = useSearchParams()
+  const [searchParams, setUrlParams] = useSearchParams()
   const { data: editingProject, isLoading } = useProject(Number(editingProjectId))
 
   const open = () => setProjectCreate({ projectCreate: true })
-  // const close = () => {
-  //   setProjectCreate({ projectCreate: undefined })
-  //   setEditingProjectId({ editingProjectId: undefined })
-  // }
-  const close = () => setUrlParams({ projectCreate: '', editingProjectId: '' })
+  const close = () => {
+    const o = cleanObject({
+      ...Object.fromEntries(searchParams),
+      projectCreate: '',
+      editingProjectId: ''
+    }) as URLSearchParamsInit
+    setUrlParams(o)
+  }
 
   const startEdit = (id: number) => setEditingProjectId({ editingProjectId: id })
 
