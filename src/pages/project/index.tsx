@@ -6,7 +6,6 @@ import { Navigate, Route, Routes, useLocation } from 'react-router'
 import { Link } from 'react-router-dom'
 
 const useRouteType = () => {
-  console.log('useLocation()', useLocation())
   const units = useLocation().pathname.split('/')
   return units[units.length - 1]
 }
@@ -49,6 +48,7 @@ const Aside = styled.aside`
 const Main = styled.div`
   box-shadow: -5px 0 5px -5px rgba(0, 0, 0, 0.1);
   display: flex;
+  overflow: hidden;
 `
 
 const Container = styled.div`

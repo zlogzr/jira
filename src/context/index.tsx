@@ -5,7 +5,17 @@ import { AuthProvider } from './auth-context'
 
 export const AppProviders = ({ children }: { children: ReactNode }) => {
   return (
-    <QueryClientProvider client={new QueryClient()}>
+    <QueryClientProvider
+      client={
+        new QueryClient({
+          defaultOptions: {
+            queries: {
+              refetchOnWindowFocus: false
+            }
+          }
+        })
+      }
+    >
       <AuthProvider>{children}</AuthProvider>
     </QueryClientProvider>
   )
