@@ -1,5 +1,6 @@
 import bugIcon from '@/assets/bug.svg'
 import taskIcon from '@/assets/task.svg'
+import { Drag, Drop, DropChild } from '@/components/drag-and-drop'
 import { Row } from '@/components/lib'
 import { Mark } from '@/components/mark'
 import { useDeleteKanban } from '@/hook/kanban'
@@ -9,6 +10,7 @@ import { Kanban } from '@/types/kanban'
 import { Task } from '@/types/task'
 import styled from '@emotion/styled'
 import { Button, Card, Dropdown, Menu, Modal } from 'antd'
+import React from 'react'
 
 import { CreateTask } from './create-task'
 import { useKanbansQueryKey, useTasksModal, useTasksSearchParams } from './util'
@@ -69,24 +71,36 @@ const More = ({ kanban }: { kanban: Kanban }) => {
   )
 }
 
-export const KanbanColumn = ({ kanban }: { kanban: Kanban }) => {
-  const { data: allTasks } = useTasks(useTasksSearchParams())
-  const tasks = allTasks?.filter(task => task.kanbanId === kanban.id)
-  return (
-    <Container>
-      <Row between={true}>
-        <h3>{kanban.name}</h3>
-        <More kanban={kanban} />
-      </Row>
-      <TasksContainer>
-        {tasks?.map(task => (
-          <TaskCard key={task.id} task={task} />
-        ))}
-        <CreateTask kanbanId={kanban.id} />
-      </TasksContainer>
-    </Container>
-  )
-}
+export const KanbanColumn = React.forwardRef<HTMLDivElement, { kanban: Kanban }>(
+  ({ kanban, ...props }, ref) => {
+    const { data: allTasks } = useTasks(useTasksSearchParams())
+    const tasks = allTasks?.filter(task => task.kanbanId === kanban.id)
+    return (
+      <Container {...props} ref={ref}>
+        <Row between={true}>
+          <h3>{kanban.name}</h3>
+          <More kanban={kanban} key={kanban.id} />
+        </Row>
+        <TasksContainer>
+          <Drop type={'ROW'} direction={'vertical'} droppableId={String(kanban.id)}>
+            <DropChild>
+              {tasks?.map((task, taskIndex) => (
+                <Drag key={task.id} index={taskIndex} draggableId={'task' + task.id}>
+                  <div>
+                    <TaskCard key={task.id} task={task} />
+                  </div>
+                </Drag>
+              ))}
+            </DropChild>
+          </Drop>
+          <CreateTask kanbanId={kanban.id} />
+        </TasksContainer>
+      </Container>
+    )
+  }
+)
+
+KanbanColumn.displayName = 'KanbanColumn'
 
 export const Container = styled.div`
   min-width: 27rem;
