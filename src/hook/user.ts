@@ -1,5 +1,5 @@
 import { useAsync } from '@/hook/use-async'
-import { User } from '@/pages/project-list/search-panel'
+import { User } from '@/types/user'
 import { cleanObject } from '@/utils'
 import { useHttp } from '@/utils/http'
 import { useEffect } from 'react'

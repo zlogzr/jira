@@ -1,5 +1,5 @@
 import { useAddConfig, useDeleteConfig, useEditConfig } from '@/hook/use-optimistic-options'
-import { Project } from '@/pages/project-list/list'
+import { Project } from '@/types/project'
 import { useHttp } from '@/utils/http'
 import { QueryKey, useMutation, useQuery } from 'react-query'
 

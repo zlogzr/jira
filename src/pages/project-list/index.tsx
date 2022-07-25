@@ -1,9 +1,8 @@
-import { ButtonNoPadding, ErrorBox, Row } from '@/components/lib'
+import { ButtonNoPadding, ErrorBox, Row, ScreenContainer } from '@/components/lib'
 import { useProjects } from '@/hook/project'
 import { useDocumentTitle } from '@/hook/useDocumentTitle'
 import { useUsers } from '@/hook/user'
 import { useDebounce } from '@/utils'
-import styled from '@emotion/styled'
 
 import { List } from './list'
 import { SearchPanel } from './search-panel'
@@ -27,7 +26,7 @@ export const ProjectList = () => {
   const { isLoading, error, data: list } = useProjects(useDebounce(param, 200))
 
   return (
-    <Container>
+    <ScreenContainer>
       <Row between={true}>
         <h1>项目列表</h1>
         <ButtonNoPadding onClick={open} type={'link'}>
@@ -37,12 +36,8 @@ export const ProjectList = () => {
       <SearchPanel users={users || []} param={param} setParam={setParam} />
       <ErrorBox error={error} />
       <List loading={isLoading} users={users || []} dataSource={list || []} />
-    </Container>
+    </ScreenContainer>
   )
 }
 
-ProjectList.whyDidYouRender = true
-
-const Container = styled.div`
-  padding: 3.2rem;
-`
+ProjectList.whyDidYouRender = false
