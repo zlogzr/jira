@@ -35,7 +35,7 @@
     "prepare": "husky install",
     "json-server": "json-server --watch __json_server_mock__/db.json --port 8000 --middlewares ./__json_server_mock__/middleware.js",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build -r git@github.com:sindu12jun/sindu12jun.github.io.git -b main"
+    "deploy": "gh-pages -d build -r https://github.com/zlogzr/zlogzr.github.io.git -b main"
   },
   "eslintConfig": {
     "extends": [
