@@ -10,22 +10,19 @@ import { resetRoute } from '@/utils'
 import styled from '@emotion/styled'
 import { Button, Dropdown, Menu } from 'antd'
 import { Navigate, Route, Routes } from 'react-router'
-import { BrowserRouter as Router } from 'react-router-dom'
 
 const AuthenticatedApp = () => {
   return (
     <Container>
-      <Router>
-        <PageHeader />
-        <Main>
-          <Routes>
-            <Route index element={<Navigate to={'/projects'} />} />
-            <Route path={'/projects'} element={<ProjectList />} />
-            <Route path={'/projects/:projectId/*'} element={<Project />} />
-          </Routes>
-        </Main>
-        <ProjectModal />
-      </Router>
+      <PageHeader />
+      <Main>
+        <Routes>
+          <Route index element={<Navigate to={'/projects'} />} />
+          <Route path={'/projects'} element={<ProjectList />} />
+          <Route path={'/projects/:projectId/*'} element={<Project />} />
+        </Routes>
+      </Main>
+      <ProjectModal />
     </Container>
   )
 }
