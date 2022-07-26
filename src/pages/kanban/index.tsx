@@ -1,5 +1,6 @@
 import { Drag, Drop, DropChild } from '@/components/drag-and-drop'
 import { ScreenContainer } from '@/components/lib'
+import { Profiler } from '@/components/profiler'
 import { useKanbans, useReorderKanban } from '@/hook/kanban'
 import { useReorderTask, useTasks } from '@/hook/task'
 import { useDocumentTitle } from '@/hook/useDocumentTitle'
@@ -31,29 +32,31 @@ export const Kanban = () => {
   const onDragEnd = useDragEnd()
 
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
-      <ScreenContainer>
-        <h1>{currentProject?.name}看板</h1>
-        <SearchPanel />
-        {isLoading ? (
-          <Spin size={'large'} />
-        ) : (
-          <ColumnsContainer>
-            <Drop type={'COLUMN'} direction={'horizontal'} droppableId={'kanban'}>
-              <DropChild style={{ display: 'flex' }}>
-                {kanbans?.map((kanban, index) => (
-                  <Drag key={kanban.id} draggableId={'kanban' + kanban.id} index={index}>
-                    <KanbanColumn kanban={kanban} key={kanban.id} />
-                  </Drag>
-                ))}
-              </DropChild>
-            </Drop>
-            <CreateKanban />
-          </ColumnsContainer>
-        )}
-        <TaskModal />
-      </ScreenContainer>
-    </DragDropContext>
+    <Profiler id={'看板页面'}>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <ScreenContainer>
+          <h1>{currentProject?.name}看板</h1>
+          <SearchPanel />
+          {isLoading ? (
+            <Spin size={'large'} />
+          ) : (
+            <ColumnsContainer>
+              <Drop type={'COLUMN'} direction={'horizontal'} droppableId={'kanban'}>
+                <DropChild style={{ display: 'flex' }}>
+                  {kanbans?.map((kanban, index) => (
+                    <Drag key={kanban.id} draggableId={'kanban' + kanban.id} index={index}>
+                      <KanbanColumn kanban={kanban} key={kanban.id} />
+                    </Drag>
+                  ))}
+                </DropChild>
+              </Drop>
+              <CreateKanban />
+            </ColumnsContainer>
+          )}
+          <TaskModal />
+        </ScreenContainer>
+      </DragDropContext>
+    </Profiler>
   )
 }
 

@@ -1,4 +1,5 @@
 import { ButtonNoPadding, ErrorBox, Row, ScreenContainer } from '@/components/lib'
+import { Profiler } from '@/components/profiler'
 import { useProjects } from '@/hook/project'
 import { useDocumentTitle } from '@/hook/useDocumentTitle'
 import { useUsers } from '@/hook/user'
@@ -26,17 +27,19 @@ export const ProjectList = () => {
   const { isLoading, error, data: list } = useProjects(useDebounce(param, 200))
 
   return (
-    <ScreenContainer>
-      <Row between={true} marginBottom={2}>
-        <h1>项目列表</h1>
-        <ButtonNoPadding onClick={open} type={'link'}>
-          创建项目
-        </ButtonNoPadding>
-      </Row>
-      <SearchPanel users={users || []} param={param} setParam={setParam} />
-      <ErrorBox error={error} />
-      <List loading={isLoading} users={users || []} dataSource={list || []} />
-    </ScreenContainer>
+    <Profiler id={'项目列表'}>
+      <ScreenContainer>
+        <Row between={true} marginBottom={2}>
+          <h1>项目列表</h1>
+          <ButtonNoPadding onClick={open} type={'link'}>
+            创建项目
+          </ButtonNoPadding>
+        </Row>
+        <SearchPanel users={users || []} param={param} setParam={setParam} />
+        <ErrorBox error={error} />
+        <List loading={isLoading} users={users || []} dataSource={list || []} />
+      </ScreenContainer>
+    </Profiler>
   )
 }
 

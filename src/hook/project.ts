@@ -1,12 +1,15 @@
 import { useAddConfig, useDeleteConfig, useEditConfig } from '@/hook/use-optimistic-options'
 import { Project } from '@/types/project'
+import { cleanObject } from '@/utils'
 import { useHttp } from '@/utils/http'
 import { QueryKey, useMutation, useQuery } from 'react-query'
 
 export const useProjects = (param?: Partial<Project>) => {
   const client = useHttp()
 
-  return useQuery<Project[]>(['projects', param], () => client('projects', { data: param }))
+  return useQuery<Project[]>(['projects', cleanObject(param)], () =>
+    client('projects', { data: param })
+  )
 }
 
 export const useEditProject = (queryKey: QueryKey) => {
