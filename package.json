@@ -15,6 +15,7 @@
     "@types/react-dom": "^18.0.6",
     "antd": "^4.21.6",
     "dayjs": "^1.11.3",
+    "gh-pages": "^4.0.0",
     "jira-dev-tool": "1.6.59",
     "react": "^18.2.0",
     "react-beautiful-dnd": "^13.1.0",
@@ -32,7 +33,9 @@
     "test": "craco test",
     "eject": "craco eject",
     "prepare": "husky install",
-    "json-server": "json-server --watch __json_server_mock__/db.json --port 8000 --middlewares ./__json_server_mock__/middleware.js"
+    "json-server": "json-server --watch __json_server_mock__/db.json --port 8000 --middlewares ./__json_server_mock__/middleware.js",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build -r git@github.com:sindu12jun/sindu12jun.github.io.git -b main"
   },
   "eslintConfig": {
     "extends": [
