@@ -12,7 +12,7 @@ import { Button, Dropdown, Menu } from 'antd'
 import { Navigate, Route, Routes } from 'react-router'
 import { BrowserRouter as Router } from 'react-router-dom'
 
-export const AuthenticatedApp = () => {
+const AuthenticatedApp = () => {
   return (
     <Container>
       <Router>
@@ -29,6 +29,8 @@ export const AuthenticatedApp = () => {
     </Container>
   )
 }
+
+export default AuthenticatedApp
 
 const PageHeader = () => {
   return (

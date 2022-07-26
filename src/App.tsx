@@ -1,18 +1,24 @@
-import { AuthenticatedApp } from '@/authenticated-app'
 import { ErrorBoundary } from '@/components/error-boundary'
-import { FullPageErrorFallback } from '@/components/lib'
+import { FullPageErrorFallback, FullPageLoading } from '@/components/lib'
 import { useAuth } from '@/context/auth-context'
-import { UnauthenticatedApp } from '@/unauthenticated-app'
+// import AuthenticatedApp from '@/authenticated-app'
+// import UnauthenticatedApp from '@/unauthenticated-app'
+import { Suspense, lazy } from 'react'
 
 import './App.css'
+
+const AuthenticatedApp = lazy(() => import('@/authenticated-app'))
+const UnauthenticatedApp = lazy(() => import('@/unauthenticated-app'))
 
 const App = () => {
   const { user } = useAuth()
   return (
     <div className="app">
-      <ErrorBoundary fallbackRender={FullPageErrorFallback}>
-        {user ? <AuthenticatedApp /> : <UnauthenticatedApp />}
-      </ErrorBoundary>
+      <Suspense fallback={<FullPageLoading />}>
+        <ErrorBoundary fallbackRender={FullPageErrorFallback}>
+          {user ? <AuthenticatedApp /> : <UnauthenticatedApp />}
+        </ErrorBoundary>
+      </Suspense>
     </div>
   )
 }

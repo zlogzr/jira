@@ -10,7 +10,7 @@ import { useState } from 'react'
 import { Login } from './Login'
 import { Register } from './Register'
 
-export const UnauthenticatedApp = () => {
+const UnauthenticatedApp = () => {
   const [isRegister, setIsRegister] = useState(false)
   const [error, setError] = useState<Error | null>(null)
   useDocumentTitle('Jira任务管理系统')
@@ -30,6 +30,8 @@ export const UnauthenticatedApp = () => {
     </Container>
   )
 }
+
+export default UnauthenticatedApp
 
 export const LongButton = styled(Button)`
   width: 100%;
