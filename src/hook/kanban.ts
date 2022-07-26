@@ -1,4 +1,8 @@
-import { useAddConfig, useDeleteConfig, useRecorderConfig } from '@/hook/use-optimistic-options'
+import {
+  useAddConfig,
+  useDeleteConfig,
+  useReorderKanbanConfig
+} from '@/hook/use-optimistic-options'
 import { Kanban } from '@/types/kanban'
 import { useHttp } from '@/utils/http'
 import { QueryKey, useMutation, useQuery } from 'react-query'
@@ -52,5 +56,5 @@ export const useReorderKanban = (queryKey: QueryKey) => {
       data: params,
       method: 'POST'
     })
-  }, useRecorderConfig(queryKey))
+  }, useReorderKanbanConfig(queryKey))
 }

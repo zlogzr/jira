@@ -2,7 +2,7 @@ import {
   useAddConfig,
   useDeleteConfig,
   useEditConfig,
-  useRecorderConfig
+  useReorderTaskConfig
 } from '@/hook/use-optimistic-options'
 import { Project } from '@/types/project'
 import { Task } from '@/types/task'
@@ -71,5 +71,5 @@ export const useReorderTask = (queryKey: QueryKey) => {
       data: params,
       method: 'POST'
     })
-  }, useRecorderConfig(queryKey))
+  }, useReorderTaskConfig(queryKey))
 }

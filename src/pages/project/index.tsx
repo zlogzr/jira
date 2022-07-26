@@ -1,4 +1,4 @@
-import { Epic } from '@/pages/epic'
+import { EpicScreen } from '@/pages/epic'
 import { Kanban } from '@/pages/kanban'
 import styled from '@emotion/styled'
 import { Menu } from 'antd'
@@ -33,7 +33,7 @@ export const Project = () => {
           {/*projects/:projectId/kanban*/}
           <Route path={'/kanban'} element={<Kanban />} />
           {/*projects/:projectId/epic*/}
-          <Route path={'/epic'} element={<Epic />} />
+          <Route path={'/epic'} element={<EpicScreen />} />
         </Routes>
       </Main>
     </Container>
@@ -54,4 +54,5 @@ const Main = styled.div`
 const Container = styled.div`
   display: grid;
   grid-template-columns: 16rem 1fr;
+  width: 100%;
 `
